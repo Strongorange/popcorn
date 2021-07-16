@@ -1,12 +1,19 @@
-const obj = {
-  first: "hi",
-  second: "hello",
-};
+class Human {
+  constructor(name, lastName) {
+    this.name = name;
+    this.lastName = lastName;
+  }
+}
 
-const obj2 = {
-  third: "bye bye",
-};
+class Baby extends Human {
+  cry() {
+    console.log("우아아앙");
+  }
+  sayName() {
+    console.log(`My name is ${this.name}`);
+  }
+}
 
-const combined = { ...obj, ...obj2 };
+const myBaby = new Baby("chanhwi", "Lee");
 
-console.log(combined);
+console.log(myBaby.cry(), myBaby.sayName());

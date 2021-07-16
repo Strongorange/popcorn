@@ -29,7 +29,9 @@ second: "hello",
 const obj2 = {
 third: "bye bye",
 };
-
 const combined = { ...obj, ...obj2 };
-
 console.log(combined); ==> { first: 'hi', second: 'hello', third: 'bye bye' }
+
+Classes
+constructor(name, lastName) 의 의미는 클래스 생성시 두 인자를 받아 사용한다는 뜻
+클래스는 상속가능 Human 을 Baby 가 상속하면 Human 의 모든것을 사용가능하다
