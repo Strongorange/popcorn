@@ -45,3 +45,9 @@ map 과 filter 는 조건에 맞는 새로운 배열을 리턴하지만 forEach 
 
 include
 배열에 특정한 것이 있는지 확인할 수 있음
+
+React Route
+exact 가 없으면 /tv , /tv/popular=> 접속시 /tv 에서 출력하라고 한 컴포넌트도 동시에 출력됨
+리액트에서는 href 말고 Link to 사용!
+Switch 는 한 번에 오직 하나의 Route 만 Render 하게 해줌
+Redirect 로 말도안되는 url ex) /tv/dawrfuhgdsfgdfsb 로 가면 홈으로 리다이렉트 해 줌!
