@@ -1,19 +1,9 @@
-class Human {
-  constructor(name, lastName) {
-    this.name = name;
-    this.lastName = lastName;
-  }
+let posts = ["Hi", "Hello", "Bye"];
+let greetings = ["Hi", "Bye", "Howdy", "Suup"];
+
+posts.forEach((post) => console.log(post));
+if (!greetings.includes("Hello")) {
+  greetings.push("Hello");
 }
 
-class Baby extends Human {
-  cry() {
-    console.log("우아아앙");
-  }
-  sayName() {
-    console.log(`My name is ${this.name}`);
-  }
-}
-
-const myBaby = new Baby("chanhwi", "Lee");
-
-console.log(myBaby.cry(), myBaby.sayName());
+console.log(greetings);

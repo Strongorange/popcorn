@@ -35,3 +35,13 @@ console.log(combined); ==> { first: 'hi', second: 'hello', third: 'bye bye' }
 Classes
 constructor(name, lastName) 의 의미는 클래스 생성시 두 인자를 받아 사용한다는 뜻
 클래스는 상속가능 Human 을 Baby 가 상속하면 Human 의 모든것을 사용가능하다
+
+Array.map , Array.filter
+map 은 2가지 인자 사용가능 첫번째는 배열에서 현재의 아이템 두번째는 배열의 인덱스
+filter 는 주어진 필터를 통과하는 아이템들의 배열을 만듬
+
+forEach
+map 과 filter 는 조건에 맞는 새로운 배열을 리턴하지만 forEach 는 각각 아이템들이 특정 동작을 함
+
+include
+배열에 특정한 것이 있는지 확인할 수 있음
