@@ -120,3 +120,7 @@ Container 에서 state 를 가지고 로직을 수행하고 Presenter 가 화면
 
 라우트에 폴더를 만들고 컨테이너를 export 하는데 필요한 index.js 들을 만들어 줌
 Router 에서 폴더경로에서 컴포넌트를 불러오는데 폴더안에 index.js 가 있으면 index.js 를 참조해 컴포넌트를 가져옴
+
+마운트 이후 실행되는 부분에서 try, catch, finally 를 사용함 finally 는 오류가 나던 잘 실행되건 어쨌던 실행하는 녀석
+try 문에서 만들어놓은 api 를 이용해서 nowPlaying,upcoming,topRated,popular 를 받아오고 this.setState 이용해서 state 에 객체들 저장 => Hooks 로 바꿀 수 있을듯
+TVContainer 도 마찬가지로 작업해줌
