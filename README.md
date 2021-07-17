@@ -150,3 +150,15 @@ movie/:id, show/:id 구별해서 들어가는 것을 구현해야함
       이후 componentDidMount 애서 movie 라면 빈 result 에 movieApi 를 사용해서 parsedId 로 영화를 찾고 state 에 저장 movie 가 아니라면 tv 이니 showApi 를 사용해서 tvshow 를 찾고 state 에 저장!
 - [x] let 으로 사용된 result 때문에 const result = {{{}} = await ~~ 사용 못 함
       ({data: result} = await ~~~~) 사용해서 해결
+
+## Presenter
+
+- [x] 각 Presenter 들에서 각 Container 가 props 로 보낸 것들을 받고 PropTypes 설정
+- [x] Section.js
+      Section.js 는 컨테이너, 타이틀, 그리드로 구성되고 title, children 을 props 로 받음
+      children 이란 우리가 주는 데이터들인데 props 로 전달하는 것이 아닌 <Section>{여기} </Section> 식으로 전달
+      https://codingmania.tistory.com/325
+      리액트에서는 children props 는 이렇게 사용하는듯
+      HomePresenter 에서 loading 과 nowPlaying 을 모두 검증 후 리턴해야함
+- [x] Loader
+      로딩시 빈 화면을 띄우는 보다는 이모티콘을 띄워주는게 나음 Loader 를 만들어주고 표시해줌
