@@ -135,3 +135,18 @@ TVContainer 도 마찬가지로 작업해줌
 이후에 Presenter 에서 onChange 를 이용해서 handleSubmit 을 실행되게 할 것
 
 # Detail Container
+
+영화나 티비쇼의 디테일 페이지로 갈때 컴포넌트는 동일한 것을 사용하되 url 을 다르게
+movie/:id, show/:id 구별해서 들어가는 것을 구현해야함
+디폴트로 Router 는 모든 Route 들에게 props 를 줌 => history,location,match 사용가능
+
+- [x] props 를 사용해서 현재내가 movie 에 있는지 show 에있는지 :id 는 무슨 값을 가지고있는지 알아내야함
+      match 에 보면 params 을 알 수 있음
+      id 가 숫자가 아니여도 params id 는 작동함 그리고 사실 params id 를 typeof 로 보면 string 임 => parseInt로 숫자로 바꿔줌
+      isNaN 을 사용해서 parsedId 가 NaN(숫자가 아니면) props 의 history.push("/") 를 사용해 홈으로 돌려보냄
+      이 경우 return 으로 보내줘서 함수를 끝내줘야함!
+- [x] movie 인지 show 인지 구분해야함
+      컴포넌트가 생성될때 isMovie 를 만드는데 props 의 location.pathname 에서 /movie/ 가 있는지 .includes 를 사용해서 true,false 를 받아 state 에 저장함
+      이후 componentDidMount 애서 movie 라면 빈 result 에 movieApi 를 사용해서 parsedId 로 영화를 찾고 state 에 저장 movie 가 아니라면 tv 이니 showApi 를 사용해서 tvshow 를 찾고 state 에 저장!
+- [x] let 으로 사용된 result 때문에 const result = {{{}} = await ~~ 사용 못 함
+      ({data: result} = await ~~~~) 사용해서 해결
