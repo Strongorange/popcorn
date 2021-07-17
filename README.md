@@ -77,3 +77,32 @@ Header 에서 export 하는건 다른 컴포넌트가 안에 있는 withRouter
 withRouter 로 감쌈으로서 props 를 받을 수 있음
 props.location.pathname 을 받아서 pathname === "경로" 를 판단해서 SC 의 border-bottom color 를 true 일때 바뀌줌
 transition 을 사용해서 간단한 애니메이션 사용
+https://ljh86029926.gitbook.io/coding-apple-react/3/history-go-and-goback
+withRouter 를 이용해서 뒤로가기 앞으로 가기 도 구현 가능한 듯
+withRouter 는 일단 props 의 history, location 같은 아이들을 사용하기 위해서 사용한다고 이해
+
+## API Part
+
+https://developers.themoviedb.org/3/movies/get-popular-movies
+
+## API Verbs
+
+- [x] Now Playing (Movie)
+- [x] Top Rated (TV, Movie)
+- [x] Popular (TV, Movie)
+- [x] Upcoming (Movie)
+- [x] Airing Today (TV)
+- [x] Detail (TV, Movie) nedd Id
+- [x] Search (TV, Movie)
+
+API 를 효율적으로 사용하기 위해 api.js 생성 후 axios 설치
+axios 는 config 설정이 가능해서 baseURL, headers, timeout 같은 것들을 여러곳에서 반복 작성할 필요가 없음
+https://www.npmjs.com/package/axios
+
+api.get 할때 반드시 상대경로를 써야함 맨 앞에 /붙이고 get 요청하면 baseURL 을 무시하고 /~~ 로 요청을 보냄
+Detail 을 가져오는 api 에서는 append to response 사용가능
+https://developers.themoviedb.org/3/getting-started/append-to-response
+한번의 요청으로 다른 정보들도 가져오기 가능 ex) 예고편 가져오기 가능
+axios 설정할때 말고도 개별적으로 params 를 추가가능 해당 기능으로 append_to_response 추가
+
+search 할때 query 는 URL encoded 가 되어야한다고 써있음

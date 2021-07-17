@@ -40,7 +40,6 @@ const SLink = styled(Link)`
 
 export default withRouter(({ location: { pathname } }) => (
   <Header className="nav">
-    {console.log(pathname)}
     <List>
       <Item current={pathname === "/"}>
         <SLink to="/">Movies</SLink>
