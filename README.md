@@ -224,3 +224,13 @@ npm i reacthelmet
   </Helmet>
   Home, TV 에서는 로딩중일때, 로딩이 완료된 후에 다른 타이틀을 가지게하고
   Detial 페이지에서는 프로그램의 이름이 나오게 설정!
+
+## Code Challenge
+
+- [] 유튜브 비디오를 보고싶음
+- [] imdb_id 를 가지고 imdb 사이트의 해당 영화페이지로 갈 수 있게 만들기
+- [] 영화사 홈페이지, 이름, 로고을 띄우기
+- [] 영화 컬렉션 (시리즈) 들을 띄워서 보여주기
+- [] /collections Route 를 추가해서 사람들이 영화 디테일 페이지로 이동할 수 있게
+  https://developers.themoviedb.org/3/collections/get-collection-details
+- [] TV 쇼의 시즌들을 보여주기
