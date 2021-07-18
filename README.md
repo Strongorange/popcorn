@@ -203,3 +203,10 @@ movie/:id, show/:id 구별해서 들어가는 것을 구현해야함
       # Style
       https://developers.themoviedb.org/3/getting-started/images
       를 보면 poster_path 에서 가져온 url 을 바로 사용하면 안되고 api 의 url 을 붙혀서 넣어줘야함
+
+- [x] Detail Presenter
+      DetailPresenter 에서 result 안의 backdrop_path 를 이용해서 화면뒤에 깔리는 backdrop 사진을 나오게 함
+      Container, Backdrop, Cover 컨테이너를 만들고 Cover 컴포넌트에 포스터를 출력하기 위해서 bgImage 라는 props 에 poster_path 를 담아서 전달하고 CSS 로 background-image :url() 을 사용해서 출력
+      Backdrop 의 z-index 를 0 으로 Cover 의 z-index 를 1 로하여 Cover 가 나오게 해줌
+      span 은 margin 을 가지지 않음
+      result 에 있는 것들을 바탕으로 데이터를 가져와서 뿌려주기!
