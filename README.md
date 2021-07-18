@@ -186,3 +186,20 @@ movie/:id, show/:id 구별해서 들어가는 것을 구현해야함
       Message 컴포넌트를 만들고 오류일시, 검색결과 없을시 텍스트 색깔을 다르게 지정해주고 컨테이너 안에 텍스트를 넣어 표시해주는 형식으로 만들어줌
       Presenter 에서 error 가 존재한다면 해당 컴포넌트를 불러옴
       search Presenter 에서는 tvShowResult 와 movieResult 의 길이가 0 일때 검색결과를 찾을수 없다고 하는 텍스트를 보내서 출력!
+
+- [x] Poster
+      Poster 컴포넌트는 Movie, TV, Search 에서 출력되고 클릭하면 /movie:id, /show/:id 로 이동시킴
+      그러기 위해서 Poster 컴포넌트는 id 가 필요하고, 포스터 이미지 url, 타이틀, 년도, 점수, 영화인지 TV 인지 알려주는 isMovie 들을 바탕으로 만들어짐
+      Link 컴포넌트 안에 감싸는데 isMovie 에따라 movie, show 로 to 경로를 설정하고
+      컨테이너 안에 포스터,타이틀,점수,년도 등을 집어넣어서 만들어 줌
+      Presenter 에서 결과들을 불러온 후 .map 으로 Poster 컴포넌트들을 출력!
+      필요한 props 를 주면서 출력하는데 year 에서 2018-10-03 중에 2018 만 빼오고싶음
+
+      # substring
+      substring 을 이용해서 년도만 쏙빼옴
+      그런데 movie.release_date 가 null 인경우 .substring is not a function 오류가 발생할 수 있어서 일단 movie.release_date 가 있는지 확인한 후 실행하게 조건을 추가해줌
+      TV 와 search 에도 마찬가지로 적용!
+
+      # Style
+      https://developers.themoviedb.org/3/getting-started/images
+      를 보면 poster_path 에서 가져온 url 을 바로 사용하면 안되고 api 의 url 을 붙혀서 넣어줘야함
