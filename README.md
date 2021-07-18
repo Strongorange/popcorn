@@ -210,3 +210,17 @@ movie/:id, show/:id 구별해서 들어가는 것을 구현해야함
       Backdrop 의 z-index 를 0 으로 Cover 의 z-index 를 1 로하여 Cover 가 나오게 해줌
       span 은 margin 을 가지지 않음
       result 에 있는 것들을 바탕으로 데이터를 가져와서 뿌려주기!
+
+## React Helmet
+
+npm i reacthelmet
+디테일로 갈때 페이지의 타이틀을 영화 이름으로 바꾸기
+헬멧은 body 에 표시되지 않고 head 에 표시됨
+
+# <Helmet>
+
+      <title>Movies | Nomflix</title>
+
+  </Helmet>
+  Home, TV 에서는 로딩중일때, 로딩이 완료된 후에 다른 타이틀을 가지게하고
+  Detial 페이지에서는 프로그램의 이름이 나오게 설정!
