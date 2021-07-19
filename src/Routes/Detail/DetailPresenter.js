@@ -3,6 +3,14 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import Helmet from "react-helmet";
 import Loader from "../../Components/Loader";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faImdb } from "@fortawesome/free-brands-svg-icons";
+import { faHome } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+const BASE_YOUTUBE = "https://www.youtube.com/watch?v=";
+const BASE_IMDB = "https://www.imdb.com/title/";
+const BASE_IMAGE = "https://image.tmdb.org/t/p/w500";
 
 const Container = styled.div`
   height: calc(100vh - 50px);
@@ -60,18 +68,58 @@ const Info = styled.span`
   font-size: 20px;
 `;
 
+const HoverInfo = styled.span`
+  font-size: 20px;
+  margin: 0px 10px;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
 const Divider = styled.span`
   margin: 0 10px;
 `;
 
 const Overview = styled.p`
-  font-size: 22px;
+  font-size: 19px;
   color: rgba(255, 255, 255, 0.8);
   line-height: 1.5;
   width: 50%;
 `;
 
-const DetailPresenter = ({ result, error, loading }) =>
+const Trailer = styled.div`
+  margin-top: 30px;
+`;
+
+const CompanyLogoContainer = styled.div`
+  background-color: rgba(255, 255, 255, 0.2);
+  width: 11vw;
+  height: 7vh;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+`;
+
+const CompanyLogo = styled.div`
+  background-image: url(${(props) => props.logoUrl});
+  width: 10vw;
+  height: 10vh;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+`;
+
+const handleImdb = (imdb_id) => {
+  window.open(`${BASE_IMDB}${imdb_id}`);
+};
+
+const handleHomepage = (homeUrl) => {
+  window.open(`${homeUrl}`);
+};
+
+const DetailPresenter = ({ result, trailerResults, error, loading }) =>
   loading ? (
     <>
       <Helmet>
@@ -122,8 +170,49 @@ const DetailPresenter = ({ result, error, loading }) =>
                     : `${genre.name} / `
                 )}
             </Info>
+            {result.imdb_id && (
+              <>
+                <Divider>▫</Divider>
+                <HoverInfo onClick={() => handleImdb(result.imdb_id)}>
+                  <FontAwesomeIcon
+                    icon={faImdb}
+                    style={{ transform: "scale(2, 1.5)" }}
+                  />
+                </HoverInfo>
+              </>
+            )}
+            {result.homepage && (
+              <>
+                <Divider>▫</Divider>
+                <HoverInfo onClick={() => handleHomepage(result.homepage)}>
+                  <FontAwesomeIcon icon={faHome} />
+                </HoverInfo>
+              </>
+            )}
+            {result.production_companies && (
+              <>
+                <CompanyLogoContainer>
+                  <CompanyLogo
+                    logoUrl={`${BASE_IMAGE}${result.production_companies[0].logo_path}`}
+                  ></CompanyLogo>
+                </CompanyLogoContainer>
+              </>
+            )}
           </InfoContainer>
           <Overview>{result.overview ? result.overview : ""}</Overview>
+          {trailerResults && trailerResults.length > 0 && (
+            <Trailer>
+              <iframe
+                width="560"
+                height="315"
+                src={`https://www.youtube.com/embed/${trailerResults[0].key}`}
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </Trailer>
+          )}
         </Data>
       </Content>
     </Container>
@@ -131,6 +220,7 @@ const DetailPresenter = ({ result, error, loading }) =>
 
 DetailPresenter.propTypes = {
   result: PropTypes.object,
+  trailerResults: PropTypes.array,
   error: PropTypes.string,
   loading: PropTypes.bool.isRequired,
 };

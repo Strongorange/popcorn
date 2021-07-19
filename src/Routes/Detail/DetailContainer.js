@@ -11,6 +11,7 @@ export default class extends React.Component {
 
     this.state = {
       result: null,
+      trailerResults: null,
       error: null,
       loading: true,
       isMovie: pathname.includes("/movie/"),
@@ -30,13 +31,16 @@ export default class extends React.Component {
       return push("/");
     }
     let result = null;
+    let trailerResults = null;
     try {
       if (isMovie) {
         const request = await moviesApi.movieDetail(parsedId);
         result = request.data;
+        trailerResults = request.data.videos.results;
       } else {
         const request = await tvApi.showDetail(parsedId);
         result = request.data;
+        trailerResults = request.data.videos.results;
       }
       console.log(result);
     } catch {
@@ -45,12 +49,20 @@ export default class extends React.Component {
       this.setState({
         loading: false,
         result,
+        trailerResults,
       });
     }
   }
 
   render() {
-    const { result, error, loading } = this.state;
-    return <DetailPresenter result={result} error={error} loading={loading} />;
+    const { result, trailerResults, error, loading } = this.state;
+    return (
+      <DetailPresenter
+        result={result}
+        trailerResults={trailerResults}
+        error={error}
+        loading={loading}
+      />
+    );
   }
 }

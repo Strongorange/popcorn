@@ -227,10 +227,18 @@ npm i reacthelmet
 
 ## Code Challenge
 
-- [] 유튜브 비디오를 보고싶음
-- [] imdb_id 를 가지고 imdb 사이트의 해당 영화페이지로 갈 수 있게 만들기
-- [] 영화사 홈페이지, 이름, 로고을 띄우기
+- [x] 유튜브 비디오를 보고싶음
+- [x] imdb_id 를 가지고 imdb 사이트의 해당 영화페이지로 갈 수 있게 만들기
+      리액트에서 font awesome 사용하기
+      https://www.daleseo.com/react-font-awesome/
+      https://codesandbox.io/s/react-font-awesome-b6vxt?from-embed=&file=/src/components/FixedWidthIcons.js
+      Tv 프로그램에는 imdb_id 가 없어서 imdb_id 가 있는지 검증후에 imdb 아이콘을 띄움
+
+  > 리액트에서 props 가 있는 함수를 onClick 이벤트로 전할때는 Arrow 함수를 이용해서 전달하면 오류없이 전달 가능
+
+- [x] 영화사 홈페이지, 이름, 로고을 띄우기
+      styled components 에서 img 는 div 로 만든후 background-image 를 사용해서 이미지를 삽입!
 - [] 영화 컬렉션 (시리즈) 들을 띄워서 보여주기
-- [] /collections Route 를 추가해서 사람들이 영화 디테일 페이지로 이동할 수 있게
+  /collections Route 를 추가해서 사람들이 영화 디테일 페이지로 이동할 수 있게
   https://developers.themoviedb.org/3/collections/get-collection-details
 - [] TV 쇼의 시즌들을 보여주기
