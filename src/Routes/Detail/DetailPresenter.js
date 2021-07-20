@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import Helmet from "react-helmet";
 import Loader from "../../Components/Loader";
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -8,9 +9,19 @@ import { faImdb } from "@fortawesome/free-brands-svg-icons";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const BASE_YOUTUBE = "https://www.youtube.com/watch?v=";
 const BASE_IMDB = "https://www.imdb.com/title/";
 const BASE_IMAGE = "https://image.tmdb.org/t/p/w500";
+const BASE_YOUTUBE = (url) => (
+  <iframe
+    width="320"
+    height="180"
+    src={`https://www.youtube.com/embed/${url}`}
+    title="YouTube video player"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen
+  ></iframe>
+);
 
 const Container = styled.div`
   height: calc(100vh - 50px);
@@ -87,8 +98,16 @@ const Overview = styled.p`
   width: 50%;
 `;
 
-const Trailer = styled.div`
+const TrailersContainer = styled.div`
   margin-top: 30px;
+  overflow-x: scroll;
+  display: flex;
+  padding-bottom: 15px;
+  justify-content: space-between;
+`;
+
+const Trailer = styled.div`
+  margin-right: 15px;
 `;
 
 const CompanyLogoContainer = styled.div`
@@ -109,6 +128,55 @@ const CompanyLogo = styled.div`
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center center;
+`;
+
+const CollectionContainer = styled.div`
+  width: 180px;
+  height: 250px;
+  margin-left: -12px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+const CollectionCover = styled.div`
+  background-image: url(${(props) => props.imgUrl});
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 180px;
+  height: 250px;
+  margin-top: 20px;
+`;
+
+const CollectionTitle = styled.span`
+  font-size: 18px;
+  margin-top: 10px;
+`;
+
+const SLink = styled(Link)``;
+
+const SeasonsContainer = styled.div`
+  display: flex;
+  align-items: center;
+  overflow-x: scroll;
+  padding-bottom: 20px;
+`;
+
+const SeasonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+`;
+
+const SeasonCover = styled.div`
+  background-image: url(${(props) => props.bgImage});
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 200px;
+  height: 200px;
 `;
 
 const handleImdb = (imdb_id) => {
@@ -189,7 +257,7 @@ const DetailPresenter = ({ result, trailerResults, error, loading }) =>
                 </HoverInfo>
               </>
             )}
-            {result.production_companies && (
+            {result.production_companies[0].logo_path ? (
               <>
                 <CompanyLogoContainer>
                   <CompanyLogo
@@ -197,21 +265,55 @@ const DetailPresenter = ({ result, trailerResults, error, loading }) =>
                   ></CompanyLogo>
                 </CompanyLogoContainer>
               </>
-            )}
+            ) : null}
           </InfoContainer>
           <Overview>{result.overview ? result.overview : ""}</Overview>
           {trailerResults && trailerResults.length > 0 && (
-            <Trailer>
-              <iframe
-                width="560"
-                height="315"
-                src={`https://www.youtube.com/embed/${trailerResults[0].key}`}
-                title="YouTube video player"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-              ></iframe>
-            </Trailer>
+            <TrailersContainer>
+              {trailerResults.map((trailer) => (
+                <Trailer>{BASE_YOUTUBE(trailer.key)}</Trailer>
+              ))}
+            </TrailersContainer>
+          )}
+          {result.belongs_to_collection && result.belongs_to_collection.id && (
+            <>
+              <CollectionContainer>
+                <SLink
+                  to={{
+                    pathname: `/collection/${result.id}/${result.belongs_to_collection.id}`,
+                    state: {
+                      collectionInfo: result.belongs_to_collection,
+                    },
+                  }}
+                >
+                  <CollectionCover
+                    imgUrl={`${BASE_IMAGE}${result.belongs_to_collection.poster_path}`}
+                  ></CollectionCover>
+                  <CollectionTitle>
+                    {result.belongs_to_collection.name}
+                  </CollectionTitle>
+                </SLink>
+              </CollectionContainer>
+            </>
+          )}
+          {result.seasons && (
+            <>
+              <Title style={{ fontSize: "32px", padding: "10px 0px" }}>
+                시즌
+              </Title>
+              <SeasonsContainer>
+                {result.seasons.map((season, index) => (
+                  <>
+                    <SeasonContainer>
+                      <SeasonCover
+                        key={season.id}
+                        bgImage={`${BASE_IMAGE}${season.poster_path}`}
+                      />
+                    </SeasonContainer>
+                  </>
+                ))}
+              </SeasonsContainer>
+            </>
           )}
         </Data>
       </Content>
