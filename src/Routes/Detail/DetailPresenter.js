@@ -110,6 +110,12 @@ const Trailer = styled.div`
   margin-right: 15px;
 `;
 
+const CompanyContainer = styled.div`
+  display: flex;
+  width: 30%;
+  gap: 20px;
+`;
+
 const CompanyLogoContainer = styled.div`
   background-color: rgba(255, 255, 255, 0.2);
   width: 11vw;
@@ -119,6 +125,17 @@ const CompanyLogoContainer = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 15px;
+`;
+
+const CompanyCountryContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20%;
+`;
+
+const CompanyCountryText = styled.span`
+  font-size: 32px;
 `;
 
 const CompanyLogo = styled.div`
@@ -257,15 +274,24 @@ const DetailPresenter = ({ result, trailerResults, error, loading }) =>
                 </HoverInfo>
               </>
             )}
-            {result.production_companies[0].logo_path ? (
-              <>
-                <CompanyLogoContainer>
-                  <CompanyLogo
-                    logoUrl={`${BASE_IMAGE}${result.production_companies[0].logo_path}`}
-                  ></CompanyLogo>
-                </CompanyLogoContainer>
-              </>
-            ) : null}
+            <CompanyContainer>
+              {result.production_companies[0].logo_path ? (
+                <>
+                  <CompanyLogoContainer>
+                    <CompanyLogo
+                      logoUrl={`${BASE_IMAGE}${result.production_companies[0].logo_path}`}
+                    ></CompanyLogo>
+                  </CompanyLogoContainer>
+                </>
+              ) : null}
+              {result.production_companies[0].origin_country ? (
+                <CompanyCountryContainer>
+                  <CompanyCountryText>
+                    {result.production_companies[0].origin_country}
+                  </CompanyCountryText>
+                </CompanyCountryContainer>
+              ) : null}
+            </CompanyContainer>
           </InfoContainer>
           <Overview>{result.overview ? result.overview : ""}</Overview>
           {trailerResults && trailerResults.length > 0 && (
